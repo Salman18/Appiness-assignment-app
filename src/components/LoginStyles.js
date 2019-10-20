@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {Platform} from 'react-native';
+import colors from '../utils/Colors';
 
-// import colors from '../../utils/Colors';
 const LoginStyles = StyleSheet.create({
   OuterContainer: {
     flex: 1,
@@ -31,7 +31,7 @@ const LoginStyles = StyleSheet.create({
   },
   LoginButton: {
     borderRadius: 20,
-    backgroundColor: 'blue',
+    backgroundColor: colors.button_blue,
     paddingVertical: Platform.OS === 'android' ? 23 : 0,
     marginBottom: 10,
     height: 10,
