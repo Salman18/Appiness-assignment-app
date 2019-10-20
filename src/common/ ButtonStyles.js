@@ -4,7 +4,7 @@ import colors from '../utils/Colors';
 const Button = StyleSheet.create({
   container: {
     height: 40,
-    borderColor: colors.button_orange,
+    borderColor: colors.button_blue,
     borderWidth: 1,
     justifyContent: 'center',
   },

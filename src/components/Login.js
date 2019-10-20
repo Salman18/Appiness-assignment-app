@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
+import {View, TextInput} from 'react-native';
 import Toast from 'react-native-simple-toast';
 import Button from '../common/Button';
 import styles from './LoginStyles';
+import color from '../utils/Colors';
+import {EMAIL_ID, PASSWORD, ERROR} from '../utils/Constants';
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,17 +14,26 @@ class Login extends React.Component {
       password: '',
     };
   }
-
+  static navigationOptions = {
+    title: 'Login',
+    headerStyle: {
+      backgroundColor: color.button_blue,
+    },
+    headerTintColor: color.headerTintColor,
+    headdingStyle: {
+      fontWeight: '300',
+    },
+  };
   authenticate = async () => {
     const {email, password} = this.state;
     const {navigation} = this.props;
 
     try {
-      if (email === 'hruday@gmail.com' && password === 'hruday123') {
-        // navigation.navigate('DashBoard', {});
+      if (email === EMAIL_ID && password === PASSWORD) {
         Toast.show('LoginSuccessfull');
+        navigation.navigate('UserListContainer', {...this.props});
       } else {
-        Toast.show('Please enter a valid phone number');
+        Toast.show(ERROR);
         return;
       }
     } catch (error) {
@@ -33,27 +44,22 @@ class Login extends React.Component {
   render() {
     return (
       <View style={styles.OuterContainer}>
-        <View>
-          <Text style={styles.Header}>Log in</Text>
-
-          <View style={styles.InputPadding}>
-            <TextInput
-              style={styles.TextInputStyle}
-              underlineColorAndroid="#1DA1f2"
-              placeholder="Please enter your email"
-              selectionColor={{color: 'red'}}
-              onChangeText={email => this.setState({email})}
-              value={this.state.email}
-            />
-            <TextInput
-              style={styles.TextInputStyle}
-              underlineColorAndroid="#1DA1f2"
-              secureTextEntry={true}
-              placeholder="Please enter your password"
-              onChangeText={password => this.setState({password})}
-              value={this.state.password}
-            />
-          </View>
+        <View style={styles.InputPadding}>
+          <TextInput
+            style={styles.TextInputStyle}
+            underlineColorAndroid={color.underlineColorAndroid}
+            placeholder="Please enter your email Id"
+            onChangeText={email => this.setState({email})}
+            value={this.state.email}
+          />
+          <TextInput
+            style={styles.TextInputStyle}
+            underlineColorAndroid={color.underlineColorAndroid}
+            secureTextEntry={true}
+            placeholder="Please enter your password"
+            onChangeText={password => this.setState({password})}
+            value={this.state.password}
+          />
         </View>
         <View style={styles.ButtonContainer}>
           <Button
